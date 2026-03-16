@@ -1,6 +1,6 @@
 /* ============================================================
    EazziDoctor — Shared Responsive Styles
-   Applied to all dashboard pages via <link rel="stylesheet">
+   Loaded AFTER page-specific CSS to ensure overrides work.
    ============================================================ */
 
 /* ── Mobile bottom nav (hidden on desktop) ── */
@@ -47,8 +47,6 @@
         flex-wrap: wrap;
         gap: 8px;
     }
-
-    /* Profile sections side by side still fine at tablet */
 }
 
 /* ═══════════════════════════════════════════
@@ -58,6 +56,10 @@
 
     /* ── Layout ── */
     .dashboard-container {
+        flex-direction: column !important;
+        height: auto !important;
+        min-height: 100vh;
+        overflow: visible !important;
         padding-bottom: 68px; /* room for bottom nav */
     }
 
@@ -68,21 +70,71 @@
 
     .main-content {
         padding: 16px 14px 20px;
+        overflow-y: visible !important;
+        height: auto !important;
     }
 
     /* ── Top bar ── */
     .top-bar {
-        flex-wrap: wrap;
+        display: grid !important;
+        grid-template-columns: 1fr auto auto;
         gap: 10px;
+        align-items: center;
         margin-bottom: 16px;
     }
 
     .top-bar > div:first-child {
-        width: 100%;
+        grid-column: 1 / -1; /* search full width */
+    }
+
+    .top-bar .profile {
+        margin-left: 0;
     }
 
     input[type="search"] {
         width: 100% !important;
+        box-sizing: border-box;
+    }
+
+    /* ── Welcome + date widget ── */
+    .welcome-message-and-date-wigdet {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+    .welcome-message h1 {
+        font-size: 1.2rem;
+    }
+
+    .date-widget {
+        font-size: 0.8rem;
+        padding: 8px 14px;
+    }
+
+    /* ── Dashboard metric + profile cards ── */
+    .metrics-container-and-profile-card-and-consultation-card {
+        flex-direction: column !important;
+    }
+
+    .consultation-card {
+        width: 100% !important;
+        min-width: unset !important;
+    }
+
+    .metrics-container {
+        flex-direction: column;
+    }
+
+    .quick-actions-and-consultations-container {
+        flex-direction: column;
+    }
+
+    .quick-actions {
+        flex: unset !important;
+        width: 100%;
+        box-sizing: border-box;
     }
 
     /* ── Page header ── */
@@ -97,6 +149,7 @@
         width: 100%;
         text-align: center;
         box-sizing: border-box;
+        display: block;
     }
 
     /* ── Tabs ── */
@@ -107,7 +160,7 @@
 
     /* ── Consultation table → horizontal scroll ── */
     .consultation-table {
-        overflow-x: auto;
+        overflow-x: auto !important;
         -webkit-overflow-scrolling: touch;
     }
 
