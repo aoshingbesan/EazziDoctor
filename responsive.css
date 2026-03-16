@@ -1,0 +1,284 @@
+/* ============================================================
+   EazziDoctor — Shared Responsive Styles
+   Applied to all dashboard pages via <link rel="stylesheet">
+   ============================================================ */
+
+/* ── Mobile bottom nav (hidden on desktop) ── */
+.mobile-bottom-nav {
+    display: none;
+}
+
+/* ═══════════════════════════════════════════
+   TABLET  (≤ 1024px)
+═══════════════════════════════════════════ */
+@media (max-width: 1024px) {
+    .dashboard-container {
+        flex-direction: column;
+        height: auto;
+        min-height: 100vh;
+        overflow: visible;
+    }
+
+    .sidebar {
+        position: static;
+        width: 100% !important;
+        min-width: unset !important;
+        height: auto !important;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: 12px 20px;
+        border-right: none;
+        border-bottom: 1px solid #E4E7EC;
+    }
+
+    .top-nav { flex: unset; }
+    .top-nav ul { flex-direction: row; gap: 4px; }
+    .bottom-nav { display: none; }
+
+    .main-content {
+        padding: 20px 16px 24px;
+        overflow-y: visible;
+        height: auto;
+    }
+
+    /* Nav header breadcrumb — allow wrap */
+    .nav-header {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    /* Profile sections side by side still fine at tablet */
+}
+
+/* ═══════════════════════════════════════════
+   MOBILE  (≤ 767px)
+═══════════════════════════════════════════ */
+@media (max-width: 767px) {
+
+    /* ── Layout ── */
+    .dashboard-container {
+        padding-bottom: 68px; /* room for bottom nav */
+    }
+
+    /* Hide the sidebar entirely — replaced by bottom nav */
+    .sidebar {
+        display: none !important;
+    }
+
+    .main-content {
+        padding: 16px 14px 20px;
+    }
+
+    /* ── Top bar ── */
+    .top-bar {
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 16px;
+    }
+
+    .top-bar > div:first-child {
+        width: 100%;
+    }
+
+    input[type="search"] {
+        width: 100% !important;
+    }
+
+    /* ── Page header ── */
+    .header-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 12px 0;
+    }
+
+    .button-link {
+        width: 100%;
+        text-align: center;
+        box-sizing: border-box;
+    }
+
+    /* ── Tabs ── */
+    .tabs {
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+
+    /* ── Consultation table → horizontal scroll ── */
+    .consultation-table {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .consultation-table .table-row {
+        min-width: 560px;
+    }
+
+    /* ── Appointment page — stack calendar + table ── */
+    .app-container {
+        flex-direction: column !important;
+        gap: 16px;
+    }
+
+    .calendar-container {
+        max-width: 100% !important;
+        width: 100%;
+    }
+
+    .visit-table {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .visit-header,
+    .visit-row {
+        min-width: 480px;
+    }
+
+    /* ── Hospital list → horizontal scroll ── */
+    .hospital-list {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .list-header,
+    .list-row {
+        min-width: 520px;
+    }
+
+    /* ── Doctor tables (new appointment / new consultation) ── */
+    table {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        width: 100%;
+    }
+
+    /* ── Nav header (breadcrumb bar) ── */
+    .nav-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        padding: 12px 14px;
+    }
+
+    .header-actions {
+        align-self: flex-end;
+    }
+
+    /* ── Doctor profile ── */
+    .profile-container {
+        padding: 16px !important;
+    }
+
+    .profile-header {
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center;
+        gap: 14px;
+    }
+
+    .profile-info {
+        margin-left: 0 !important;
+    }
+
+    .request-button {
+        width: 100%;
+    }
+
+    .profile-sections {
+        flex-direction: column !important;
+        gap: 16px;
+    }
+
+    /* ── Form containers (book / request) ── */
+    .container {
+        padding: 20px 14px !important;
+    }
+
+    /* ── Text container ── */
+    .text-container {
+        padding: 0 0 12px;
+    }
+
+    .text-container h2 {
+        font-size: 1rem;
+    }
+
+    /* ── Mobile bottom nav ── */
+    .mobile-bottom-nav {
+        display: flex;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: #fff;
+        border-top: 1px solid #E4E7EC;
+        z-index: 200;
+        height: 64px;
+        box-shadow: 0 -2px 12px rgba(15, 23, 42, 0.07);
+    }
+
+    .mobile-bottom-nav a {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 3px;
+        color: #6B7280;
+        text-decoration: none;
+        font-size: 0.62rem;
+        font-weight: 500;
+        padding: 8px 4px;
+        transition: color 0.15s ease;
+    }
+
+    .mobile-bottom-nav a.mob-active {
+        color: #2563EB;
+    }
+
+    .mobile-bottom-nav .mob-icon {
+        font-size: 1.25rem;
+        line-height: 1;
+    }
+}
+
+/* ═══════════════════════════════════════════
+   SMALL MOBILE  (≤ 480px)
+═══════════════════════════════════════════ */
+@media (max-width: 480px) {
+    .main-content {
+        padding: 12px 10px 16px;
+    }
+
+    .tab {
+        font-size: 0.78rem;
+        padding: 6px 12px;
+    }
+
+    .tab .count {
+        font-size: 0.72rem;
+        padding: 1px 6px;
+    }
+
+    .metric-card {
+        padding: 14px 12px;
+    }
+
+    .header-container h2,
+    .text-container h2 {
+        font-size: 0.95rem;
+    }
+
+    /* Doctor table cells */
+    .doctor-info {
+        gap: 8px;
+    }
+
+    .doctor-info img {
+        width: 32px;
+        height: 32px;
+    }
+}

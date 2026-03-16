@@ -7,6 +7,33 @@ if (typeof supabase !== 'undefined') {
     client = supabase.createClient(supabaseUrl, supabaseKey);
 }
 
+// ── Mobile Bottom Nav ─────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', function () {
+    // Only inject on pages that have a sidebar (dashboard pages)
+    if (!document.querySelector('.sidebar')) return;
+
+    const page = window.location.pathname.split('/').pop() || 'dashboard.html';
+    const navItems = [
+        { href: './dashboard.html',    icon: '🏠', label: 'Home',         pages: ['dashboard.html'] },
+        { href: './consultdoctor.html', icon: '💬', label: 'Consult',      pages: ['consultdoctor.html', 'newconsultation.html', 'requestconsultation.html', 'doctorprofile(consultation).html'] },
+        { href: './appointment.html',  icon: '📅', label: 'Appointments', pages: ['appointment.html', 'newappointment.html', 'bookappointment.html', 'doctorprofile(appointment).html'] },
+        { href: './myhospitals.html',  icon: '🏥', label: 'Hospitals',    pages: ['myhospitals.html'] },
+    ];
+
+    const nav = document.createElement('nav');
+    nav.className = 'mobile-bottom-nav';
+
+    navItems.forEach(function (item) {
+        const a = document.createElement('a');
+        a.href = item.href;
+        if (item.pages.includes(page)) a.classList.add('mob-active');
+        a.innerHTML = `<span class="mob-icon">${item.icon}</span><span>${item.label}</span>`;
+        nav.appendChild(a);
+    });
+
+    document.body.appendChild(nav);
+});
+
 // ── Active Sidebar State (URL-based) ─────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', function () {
     const page = window.location.pathname.split('/').pop() || 'dashboard.html';
