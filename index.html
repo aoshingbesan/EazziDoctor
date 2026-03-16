@@ -1,142 +1,163 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up Page</title>
+    <link rel="icon" href="./images/Avatar.png" type="image/png">
+    <title>EazziDoctor — Sign Up</title>
     <link rel="stylesheet" href="signup.css">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
 </head>
-
 <body>
-    <div class="signup-container">
-        <div class="logo">
-            <img src="./images/Logo.png" alt="Logo">
+
+    <!-- Left: image -->
+    <div class="left-panel"></div>
+
+    <!-- Right: form -->
+    <div class="right-panel">
+        <div class="signup-container">
+
+            <div class="logo">
+                <img src="./images/Logo.png" alt="EazziDoctor">
+            </div>
+
+            <h1>Create your account</h1>
+            <p class="subtitle">Start managing your health and appointments in one place.</p>
+
+            <form id="signup-form" novalidate>
+                <div class="input-group">
+                    <label for="fullname">Full Name <span class="required">*</span></label>
+                    <input type="text" id="fullname" name="fullname" placeholder="John Doe" autocomplete="name">
+                    <span class="error-msg" id="fullname-error"></span>
+                </div>
+
+                <div class="input-group">
+                    <label for="email">Email Address <span class="required">*</span></label>
+                    <input type="email" id="email" name="email" placeholder="you@example.com" autocomplete="email">
+                    <span class="error-msg" id="email-error"></span>
+                </div>
+
+                <div class="input-group">
+                    <label for="password">Password <span class="required">*</span></label>
+                    <div class="password-wrapper">
+                        <input type="password" id="password" name="password" placeholder="Min. 6 characters" autocomplete="new-password">
+                        <button type="button" class="toggle-password" id="toggle-password" aria-label="Toggle password visibility">👁</button>
+                    </div>
+                    <span class="error-msg" id="password-error"></span>
+                </div>
+
+                <div class="input-group">
+                    <label for="confirm_password">Confirm Password <span class="required">*</span></label>
+                    <div class="password-wrapper">
+                        <input type="password" id="confirm_password" name="confirm_password" placeholder="Re-enter password" autocomplete="new-password">
+                        <button type="button" class="toggle-password" id="toggle-confirm" aria-label="Toggle confirm password visibility">👁</button>
+                    </div>
+                    <span class="error-msg" id="confirm-error"></span>
+                </div>
+
+                <span class="error-msg" id="form-error"></span>
+                <button type="submit" class="signup-button">Sign Up</button>
+                <p class="alternative">Already have an account? <a href="./login.html">Log In</a></p>
+            </form>
+
         </div>
-        <form id="signup-form">
-            <div class="input-group">
-                <input type="text" id="fullname" name="fullname" required placeholder="Full Name">
-            </div>
-            <div class="input-group">
-                <input type="email" id="email" name="email" required placeholder="E-mail">
-            </div>
-            <div class="input-group">
-                <input type="password" id="password" name="password" required placeholder="Password">
-            </div>
-            <div class="input-group">
-                <input type="password" id="confirm_password" name="confirm_password" required
-                    placeholder="Confirm Password">
-            </div>
-            <div class="input-group">
-                <input type="checkbox" id="show_password" name="show_password">
-                <label for="show_password">Show password</label>
-            </div>
-            <button type="submit" class="signup-button">Sign Up</button>
-            <p class="alternative">Already have an account? <a href="./login.html">Login</a></p>
-            <div class="divider">or</div>
-            <button type="button" class="google-signup">Sign Up with Gmail</button>
-        </form>
     </div>
 
     <script>
-
-        document.addEventListener('DOMContentLoaded', function () {
-            // Get form elements
-
-            const passwordInput = document.getElementById('password');
-            const confirmPasswordInput = document.getElementById('confirm_password');
-            const showPasswordCheckbox = document.getElementById('show_password');
-
-            // Toggle password visibility
-            showPasswordCheckbox.addEventListener('change', function () {
-                const type = showPasswordCheckbox.checked ? 'text' : 'password';
-                passwordInput.type = type;
-                confirmPasswordInput.type = type;
-            });
+        // Toggle password visibility
+        document.getElementById('toggle-password').addEventListener('click', function () {
+            const input = document.getElementById('password');
+            input.type = input.type === 'password' ? 'text' : 'password';
+            this.textContent = input.type === 'password' ? '👁' : '🙈';
+        });
+        document.getElementById('toggle-confirm').addEventListener('click', function () {
+            const input = document.getElementById('confirm_password');
+            input.type = input.type === 'password' ? 'text' : 'password';
+            this.textContent = input.type === 'password' ? '👁' : '🙈';
         });
 
-        const supabaseUrl = 'https://cgwfbohodsudyhyuuxwa.supabase.co';
-        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNnd2Zib2hvZHN1ZHloeXV1eHdhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjIwNjU1NzYsImV4cCI6MjAzNzY0MTU3Nn0.oLlmLnpGf09Edemcw8k8XanluU8wehFmTQ44HSg3dtM';
+        // Supabase
+        const supabaseUrl = 'https://woodcilxiuaemofemjtd.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indvb2RjaWx4aXVhZW1vZmVtanRkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMxNzYyOTgsImV4cCI6MjA4ODc1MjI5OH0.3bXgZhXVk6coW72q6cDuGewd4sNHZamFMBBOBU7yMBs';
         const client = supabase.createClient(supabaseUrl, supabaseKey);
 
-        document.getElementById('signup-form').addEventListener('submit', async function (event) {
-            event.preventDefault(); // Prevent the form from submitting the traditional way
-            let fullname = document.getElementById('fullname').value;
-            let email = document.getElementById('email').value;
-            let password = document.getElementById('password').value;
-            const signupForm = document.getElementById('signup-form');
-            const passwordInput = document.getElementById('password');
-            const confirmPasswordInput = document.getElementById('confirm_password');
+        function showError(id, msg) {
+            const el = document.getElementById(id);
+            if (el) el.textContent = msg;
+        }
+        function clearErrors() {
+            ['fullname-error', 'email-error', 'password-error', 'confirm-error', 'form-error'].forEach(id => showError(id, ''));
+            ['fullname', 'email', 'password', 'confirm_password'].forEach(id => {
+                document.getElementById(id)?.classList.remove('input-error');
+            });
+        }
+
+        document.getElementById('signup-form').addEventListener('submit', async function (e) {
+            e.preventDefault();
+            clearErrors();
+
+            const fullname = document.getElementById('fullname').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm_password').value;
+            let valid = true;
+
+            if (!fullname) {
+                showError('fullname-error', 'Full name is required.');
+                document.getElementById('fullname').classList.add('input-error');
+                valid = false;
+            }
+            if (!email) {
+                showError('email-error', 'Email is required.');
+                document.getElementById('email').classList.add('input-error');
+                valid = false;
+            } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                showError('email-error', 'Please enter a valid email address.');
+                document.getElementById('email').classList.add('input-error');
+                valid = false;
+            }
+            if (!password) {
+                showError('password-error', 'Password is required.');
+                document.getElementById('password').classList.add('input-error');
+                valid = false;
+            } else if (password.length < 6) {
+                showError('password-error', 'Password must be at least 6 characters.');
+                document.getElementById('password').classList.add('input-error');
+                valid = false;
+            }
+            if (password !== confirmPassword) {
+                showError('confirm-error', 'Passwords do not match.');
+                document.getElementById('confirm_password').classList.add('input-error');
+                valid = false;
+            }
+            if (!valid) return;
+
+            const btn = document.querySelector('.signup-button');
+            btn.textContent = 'Creating account...';
+            btn.disabled = true;
 
             try {
-
-                // Function to validate email format
-                function validateEmail(email) {
-                    const re = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-                    return re.test(String(email).toLowerCase());
-                }
-
-                // Function to check if passwords match
-                function validatePasswords() {
-                    if (passwordInput.value !== confirmPasswordInput.value) {
-                        alert('Passwords do not match!');
-                        return false; // Prevent form submission
-                    }
-                    return true;
-                }
-
-
-                if (!validateEmail(email)) {
-                    alert('Please enter a valid email address.');
-                    return; // Stop the sign-up process if the email is invalid
-                }
-
-                if (!validatePasswords()) {
-                    return; // Stop the sign-up process if the passwords do not match
-                }
-
-
-                signupForm.addEventListener('submit', function (event) {
-                    if (!validatePasswords()) {
-                        event.preventDefault(); // Prevent form submission if passwords do not match
-                    }
-                });
-
-
-                // Assuming fullname is a string like "John Doe"
                 const names = fullname.split(' ');
-                const firstName = names[0];
-                const lastName = names.slice(1).join(' ');
-
                 const { data, error } = await client.auth.signUp({
-                    email: email,
-                    password: password,
-                    options: {
-                        data: {
-                            first_name: firstName,
-                            last_name: lastName
-                        }
-                    }
+                    email,
+                    password,
+                    options: { data: { first_name: names[0], last_name: names.slice(1).join(' ') } }
                 });
-
 
                 if (error) {
-                    console.error('Error:', error.message);
-                    alert('Sign up failed: ' + error.message);
+                    showError('form-error', error.message);
+                    btn.textContent = 'Sign Up';
+                    btn.disabled = false;
                 } else {
-                    console.log('Sign up successful:', data);
-                    alert('Sign up successful! Then go ahead to Login.');
-                    window.location.href = '/login.html'; // Redirect to index.html upon successful sign-up
+                    btn.textContent = 'Account created! Redirecting...';
+                    setTimeout(() => { window.location.href = './login.html'; }, 1500);
                 }
-            } catch (error) {
-                console.error('Unexpected error:', error);
-                alert('An unexpected error occurred: ' + error.message);
+            } catch (err) {
+                showError('form-error', 'An unexpected error occurred. Please try again.');
+                btn.textContent = 'Sign Up';
+                btn.disabled = false;
             }
         });
     </script>
-
 </body>
-
 </html>

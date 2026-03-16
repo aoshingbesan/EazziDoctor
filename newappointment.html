@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="icon" href="./images/Avatar.png" type="image/png">
+    <title>EazziDoctor — New Appointment</title>
     <link rel="stylesheet" href="./newappointment.css">
 </head>
 <body>
@@ -31,6 +32,7 @@
                     <li><a href="#">Settings</a></li>
                     <li><a href="#">Help Center</a></li>
                     <li><a href="#">Refer Family & Friends</a></li>
+                    <li><a href="#" id="logout-btn" style="color: #DC2626;">Log Out</a></li>
                 </ul>
             </nav>
         </div>
@@ -161,9 +163,15 @@
                     <!-- Repeat for other doctors -->
                 </tbody>
             </table>
+            <div class="empty-state" id="doctors-empty">
+                <div class="empty-icon">🔍</div>
+                <p>No doctors found</p>
+                <small>Try a different search term</small>
+            </div>
                 
             
         </div>
     </div>
+    <script src="script.js"></script>
 </body>
 </html>

@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="icon" href="./images/Avatar.png" type="image/png">
+    <title>EazziDoctor — Consult a Doctor</title>
     <link rel="stylesheet" href="./consultdoctor.css">
 </head>
 
@@ -33,6 +34,7 @@
                     <li><a href="#">Settings</a></li>
                     <li><a href="#">Help Center</a></li>
                     <li><a href="#">Refer Family & Friends</a></li>
+                    <li><a href="#" id="logout-btn" style="color: #DC2626;">Log Out</a></li>
                 </ul>
             </nav>
         </div>
@@ -184,7 +186,12 @@
                         <p>1:00 PM</p>
                     </div>
                 </div>
-                <!-- Repeat for other entries -->
+                <!-- Empty state -->
+                <div class="empty-state" id="consult-empty">
+                    <div class="empty-icon">💬</div>
+                    <p>No consultations found</p>
+                    <small>Try a different search or start a new consultation</small>
+                </div>
             </div>
         </div>
         <script src="script.js"></script>
